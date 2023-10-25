@@ -22,6 +22,9 @@ const BannerFirst = React.lazy(() => import('./Banner-First'));
 const BannerFirstPostEdit = React.lazy(() => import('./Banner-First/BannerFirstPostEdit'));
 const BannerSecond = React.lazy(() => import('./Banner-Second'));
 const BannerSecondPostEdit = React.lazy(() => import('./Banner-Second/BannerSecondPostEdit'));
+const Contact = React.lazy(() => import('./Contact'));
+const ContactPostEdit = React.lazy(() => import('./Contact/ContactPostEdit'));
+
 export const samplePagesConfigs = [
   {
     permittedRole: RoutePermittedRole.user,
@@ -127,6 +130,16 @@ export const samplePagesConfigs = [
     permittedRole: RoutePermittedRole.user,
     path: '/banner-second/add',
     element: <BannerSecondPostEdit/>,
+  },
+  {
+    permittedRole: RoutePermittedRole.user,
+    path: '/contact',
+    element: <Contact/>,
+  },
+  {
+    permittedRole: RoutePermittedRole.user,
+    path: '/contact/add',
+    element: <ContactPostEdit/>,
   },
 
 ];

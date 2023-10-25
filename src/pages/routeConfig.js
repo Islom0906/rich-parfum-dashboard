@@ -57,6 +57,14 @@ const routesConfig = [
         path: '/banner-first',
       },
       {
+        id: 'contact',
+        title: 'contact',
+        messageId: 'sidebar.sample.contact',
+        type: 'item',
+        icon: <FaMapMarkerAlt />,
+        path: '/contact',
+      },
+      {
         id: 'bannerSecond',
         title: 'bannerSecond',
         messageId: 'sidebar.sample.bannerSecond',
