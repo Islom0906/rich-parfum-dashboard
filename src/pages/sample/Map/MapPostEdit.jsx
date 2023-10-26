@@ -79,7 +79,6 @@ const MapPostEdit = () => {
         }
     });
 
-    console.log(editId)
     // map success
     useEffect(() => {
         if (putMapSuccess) {

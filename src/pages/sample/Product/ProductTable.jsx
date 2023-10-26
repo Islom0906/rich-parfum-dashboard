@@ -70,7 +70,7 @@ const ProductTable = ({data,deleteHandle}) => {
             render: (_, record) => (
                 <Space size={20}>
                     <Button
-                        onClick={() => Edit(record.id)}
+                        onClick={() => Edit(record.slug)}
                         type='primary'
                         icon={<EditOutlined />}>
                         Edit
@@ -78,7 +78,7 @@ const ProductTable = ({data,deleteHandle}) => {
                     <Popconfirm
                         title={'Are you sure to delete this task?'}
                         description={'Delete the task '}
-                        onConfirm={() => Delete(record.id)}>
+                        onConfirm={() => Delete(record.slug)}>
                         <Button type='danger' icon={<DeleteOutlined />}>
                             Delete
                         </Button>

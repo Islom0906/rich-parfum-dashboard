@@ -1,5 +1,5 @@
 import {useEffect, useMemo, useState} from 'react';
-import {Button, Col, Form, Input, message, Row, Select, Radio, Upload,} from 'antd';
+import {Button, Col, Form, Input, message, Row, Select, Radio, Upload,Typography} from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import ImgCrop from 'antd-img-crop';
 import {useMutation, useQuery} from 'react-query';
@@ -9,7 +9,7 @@ import {useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {EDIT_DATA} from '../../../shared/constants/ActionTypes';
 import FormListType from "./FormListType";
-
+const {Title}=Typography
 const initialValueForm = {
     name_uz: "",
     name_ru: "",
@@ -50,36 +50,30 @@ const PostEditProduct = () => {
     const [fileList, setFileList] = useState([]);
     const [valuesForm, setValues] = useState({});
     const [isNotEditImages, setIsNotEditImages] = useState(false);
-    const [deleteImage, setDeleteImage] = useState({});
-    const [productType, setProductType] = useState('copy');
+    const [deleteImage, setDeleteImage] = useState([]);
+    const [productType, setProductType] = useState('Copy');
 
 
     //                                           ===React-Query===
     // query-category
-    const {data: categoryData, refetch: categoryFetch} = useQuery(
+    const {data: categoryData} = useQuery(
         'get-categories',
         () => apiService.getData('/products/index-category/'),
-        {
-            enabled: false,
-        },
+
     );
 
     // query-brand
-    const {data: brandData, refetch: brandFetch} = useQuery(
+    const {data: brandData} = useQuery(
         'get-brand',
         () => apiService.getData('/products/brand/'),
-        {
-            enabled: false,
-        },
+
     );
 
     // query-smell
-    const {data: smellData, refetch: smellFetch} = useQuery(
+    const {data: smellData} = useQuery(
         'get-smell',
         () => apiService.getData('/products/smell/'),
-        {
-            enabled: false,
-        },
+
     );
 
 
@@ -122,7 +116,7 @@ const PostEditProduct = () => {
         isSuccess: editProductSuccess,
     } = useQuery(
         ['edit-product', editId],
-        () => apiService.getDataByID('/Product', editId),
+        () => apiService.getDataByID('/products/product', editId),
         {
             enabled: false,
         },
@@ -152,12 +146,19 @@ const PostEditProduct = () => {
     //                                           ===UseEffect===
     // product success
     useEffect(() => {
-
+        let delImage = []
         if (putProductSuccess) {
             dispatch({type: EDIT_DATA, payload: ''});
         }
-        if (editProductSuccess && deleteImage?.uid) {
-            imagesDeleteMutate({url: '/ProductImage', id: deleteImage?.uid});
+
+        deleteImage?.map(image => {
+            if (editProductSuccess && image?.uid) {
+                delImage.push(image?.uid)
+            }
+
+        })
+        if (editProductSuccess&&delImage.length>0) {
+            imagesDeleteMutate({url: '/products/product-image/', id:delImage[0]});
         }
         if (postProductSuccess || putProductSuccess) {
             navigate('/product');
@@ -181,33 +182,82 @@ const PostEditProduct = () => {
         if (editId === '') {
             form.setFieldsValue(initialValueForm);
         }
-        categoryFetch();
-        brandFetch();
-        smellFetch()
+
     }, []);
 
     //edit product
     useEffect(() => {
-        const imageInitial = [
-            {
-                uid: editProductData?.image?.id,
-                name: editProductData?.image?.name,
-                status: 'done',
-                url: `${process.env.REACT_APP_API_URL}/${editProductData?.image.name}`,
-            },
-        ];
+        let copy=[]
+        let luxCopy=[]
+        let original=[]
+
+        const imagesInitial = [];
+        for (let i = 0; i < editProductData?.product_images?.length; i++) {
+            const editDefaultImages = {
+                uid: editProductData?.product_images[i]?.id,
+                name: editProductData?.product_images[i]?.id,
+                location: editProductData?.product_images[i]?.image,
+                status: "done",
+                url: editProductData?.product_images[i]?.image
+            };
+            imagesInitial.push(editDefaultImages);
+        }
+
+        editProductData?.product_type.map(type=>{
+            if (type.name_uz==='Copy'){
+                type?.product_size?.map(size=>{
+                    const data={
+                        litr:size.litr,
+                        price:size.price,
+                        discount:size.discount
+                    }
+                    copy.push(data)
+                })
+            }
+            if (type.name_uz==='Lux Copy'){
+                type?.product_size?.map(size=>{
+                    const data={
+                        litr:size.litr,
+                        price:size.price,
+                        discount:size.discount
+                    }
+                    luxCopy.push(data)
+                })
+            }
+            if (type.name_uz==='Original'){
+                type?.product_size?.map(size=>{
+                    const data={
+                        litr:size.litr,
+                        price:size.price,
+                        discount:size.discount
+                    }
+                    original.push(data)
+                })
+            }
+        })
+
+
         if (editProductSuccess) {
             const edit = {
-                nameRu: editProductData?.nameRu,
-                nameEg: editProductData?.nameEg,
-                price: editProductData?.price,
-                opisaniyaRu: editProductData?.opisaniyaRu,
-                opisaniyaEg: editProductData?.opisaniyaEg,
-                images: imageInitial,
-                productTypeId: editProductData?.productTypeId,
-                priceSkitka: editProductData?.priceSkitka,
+                name_uz: editProductData.name_uz,
+                name_ru: editProductData.name_ru,
+                the_parmufe_uz: editProductData.the_parmufe_uz,
+                the_parmufe_ru: editProductData.the_parmufe_ru,
+                ingredients_uz: editProductData.ingredients_uz,
+                ingredients_ru: editProductData.ingredients_ru,
+                scents_uz: editProductData.scents_uz,
+                scents_ru: editProductData.scents_ru,
+                gender: editProductData.gender,
+                occasion: editProductData.occasion,
+                category: editProductData.category,
+                brand: editProductData.brand_id,
+                smell: editProductData.smell,
+                image: imagesInitial,
+                copy,
+                luxCopy,
+                original
             };
-            setFileListProps(imageInitial);
+            setFileListProps(imagesInitial);
             form.setFieldsValue(edit);
         }
     }, [editProductData]);
@@ -216,9 +266,11 @@ const PostEditProduct = () => {
     useEffect(() => {
         let imageData = []
 
+
+
         let patchImagesAndInitialImages = [];
         if (imagesUploadSuccess) {
-            patchImagesAndInitialImages = fileList.concat(imagesUpload);
+            patchImagesAndInitialImages = fileList.concat(imagesUpload?.images);
         } else {
             patchImagesAndInitialImages = [...fileList];
         }
@@ -232,7 +284,7 @@ const PostEditProduct = () => {
 
 
         if (!editProductSuccess && imagesUpload) {
-                imagesUpload?.map(image => {
+            imagesUpload?.images?.map(image => {
                 imageData.push(image?.id)
             })
         } else {
@@ -246,20 +298,67 @@ const PostEditProduct = () => {
                 }
             });
         }
+        // product type
+        const product_type = []
+
+        if (valuesForm.copy?.length > 0) {
+            const data = {
+                name_uz: "Copy",
+                name_ru: "Копия",
+                product_size: [
+                    ...valuesForm.copy
+                ]
+            }
+            product_type.push(data)
+        }
+
+        if (valuesForm.luxCopy?.length > 0) {
+            const data = {
+                name_uz: "Lux Copy",
+                name_ru: "Люкс Копия",
+                product_size: [
+                    ...valuesForm.luxCopy
+                ]
+            }
+            product_type.push(data)
+        }
+
+        if (valuesForm.original?.length > 0) {
+            const data = {
+                name_uz: "Original",
+                name_ru: "Оригинал",
+                product_size: [
+                    ...valuesForm.original
+                ]
+            }
+            product_type.push(data)
+        }
+
+
+
+
         const data = {
-            nameRu: valuesForm.nameRu,
-            nameEg: valuesForm.nameEg,
-            price: valuesForm.price,
-            opisaniyaRu: valuesForm.opisaniyaRu,
-            opisaniyaEg: valuesForm.opisaniyaEg,
-            productTypeId: valuesForm.productTypeId,
-            priceSkitka: valuesForm.priceSkitka === null ? 0 : valuesForm.priceSkitka,
+            name_uz: valuesForm.name_uz,
+            name_ru: valuesForm.name_ru,
+            the_parmufe_uz: valuesForm.the_parmufe_uz,
+            the_parmufe_ru: valuesForm.the_parmufe_ru,
+            ingredients_uz: valuesForm.ingredients_uz,
+            ingredients_ru: valuesForm.ingredients_ru,
+            scents_uz: valuesForm.scents_uz,
+            scents_ru: valuesForm.scents_ru,
+            gender: valuesForm.gender,
+            occasion: valuesForm.occasion,
+            category: valuesForm.category,
+            brand: valuesForm.brand,
+            smell: valuesForm.smell,
+            image: imageData,
+            product_type
         };
 
         if (imagesUploadSuccess && !editProductSuccess) {
-            postProductMutate({url: '/Product', data});
+            postProductMutate({url: '/products/product/', data});
         } else if (isNotEditImages || imagesUploadSuccess) {
-            putProduct({url: '/Product', data, id: editId});
+            putProduct({url: '/products/product', data, id: editId});
         }
     }, [imagesUpload, valuesForm]);
 
@@ -269,12 +368,11 @@ const PostEditProduct = () => {
 
         let uploadNewImage = false;
 
-
         fileListProps?.map(file => {
             if (editProductSuccess) {
                 if (file?.originFileObj?.uid) {
                     uploadNewImage = true;
-                    formData.append('media', file?.originFileObj);
+                    formData.append('uploaded_images', file?.originFileObj);
                     setIsNotEditImages(false);
                     setFileList(fileListProps);
                 } else {
@@ -284,15 +382,10 @@ const PostEditProduct = () => {
                 }
             } else {
                 uploadNewImage = true;
-                formData.append('media', fileListProps[0]?.originFileObj);
+                formData.append('uploaded_images', file?.originFileObj);
             }
 
         })
-
-
-
-
-
         if (uploadNewImage && !imagesUploadSuccess) {
             imagesUploadMutate({url: '/products/product-image/', formData});
         }
@@ -364,12 +457,20 @@ const PostEditProduct = () => {
     }, []);
 
     const optionsCategoryIndex = useMemo(() => {
-        return categoryData?.map((option) => {
+        const data = categoryData?.map((option) => {
             return {
                 value: option?.id,
                 label: `${option?.name} ${option?.date}`,
             };
         });
+
+        const defaultData = {
+            value: null,
+            label: `Без категории`,
+        };
+        data?.push(defaultData)
+
+        return data
     }, [categoryData]);
 
     const optionsBrand = useMemo(() => {
@@ -418,9 +519,6 @@ const PostEditProduct = () => {
         imgWindow?.document.write(image.outerHTML);
     };
 
-    // const handleChange = (value) => {
-    //   console.log(`selected ${value}`);
-    // };
 
     const chooseType = (e) => {
         setProductType(e.target.value)
@@ -450,6 +548,7 @@ const PostEditProduct = () => {
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
                     autoComplete='off'>
+                    <Title level={3}>Название и описание продукта</Title>
                     <Row gutter={20}>
                         <Col span={12}>
                             <Form.Item
@@ -562,6 +661,7 @@ const PostEditProduct = () => {
                             </Form.Item>
                         </Col>
                     </Row>
+                    <Title level={3}>Выбор к какому типу относится товар</Title>
                     <Row gutter={20}>
                         <Col span={12}>
                             <Form.Item
@@ -669,6 +769,7 @@ const PostEditProduct = () => {
                         </Col>
 
                     </Row>
+                    <Title level={3}>Изображения товаров (можно загрузить до 3 изображений, Размер: 480x680)</Title>
                     <Form.Item
                         label='Загрузить изображение'
                         name={'image'}
@@ -682,12 +783,13 @@ const PostEditProduct = () => {
                                 onPreview={onPreview}
                                 beforeUpload={() => false}
                                 onRemove={handleRemoveImage}>
-                                {fileListProps?.length < 2 && '+ Upload'}
+                                {fileListProps?.length < 3 && '+ Upload'}
                             </Upload>
                         </ImgCrop>
                     </Form.Item>
+                    <Title level={3}>Размеры и цены продукции</Title>
                     <Form.Item label="Размер товара" name="checkProductType">
-                        <Radio.Group onChange={chooseType}>
+                        <Radio.Group onChange={chooseType} defaultValue={'Copy'}>
                             <Radio.Button value="Copy">Copy</Radio.Button>
                             <Radio.Button value="Lux Copy">Lux Copy</Radio.Button>
                             <Radio.Button value="Original">Original</Radio.Button>

@@ -19,6 +19,7 @@ const defaultTwitter = '@crema';
 const defaultSep = ' | ';
 
 const AppPageMetadata = ({children, ...rest}) => {
+
   const {pathname} = useLocation();
   const getMetaTags = (
     {

@@ -1,24 +1,22 @@
-import { Button,  Popconfirm, Space, Table,Image } from "antd";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Button,   Space, Table,Image } from "antd";
+import {  EditOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
 import {useDispatch} from "react-redux";
 import {EDIT_DATA} from "../../../shared/constants/ActionTypes";
 import {useNavigate} from "react-router-dom";
 import { useEffect, useState } from "react";
 
-const ServiceTable = ({data,deleteHandle}) => {
+const AboutTable = ({data}) => {
     const dispatch=useDispatch()
     const navigate =useNavigate()
-    const Delete = async (id) => {
-        deleteHandle('/about/about-service',id)
-    };
+
 
     const [reverseData,setReverseData]=useState([])
 
     const Edit = (id) => {
         localStorage.setItem('editDataId',id)
         dispatch({type:EDIT_DATA,payload:id})
-        navigate('/service/add')
+        navigate('/about/add')
     };
 
     useEffect(()=>{
@@ -27,15 +25,15 @@ const ServiceTable = ({data,deleteHandle}) => {
     },[data])
     const columns = [
         {
-            title: 'Name Uz',
-            dataIndex: 'name_uz',
-            id: 'name_uz',
+            title: 'Text Uz',
+            dataIndex: 'text_uz',
+            id: 'text_uz',
             render: (text) => <p>{text}</p>,
         },
         {
-            title: 'Name Ru',
-            dataIndex: 'name_ru',
-            id: 'name_ru',
+            title: 'Text Ru',
+            dataIndex: 'text_ru',
+            id: 'text_ru',
             render: (text) => <p>{text}</p>,
         },
         {
@@ -43,11 +41,12 @@ const ServiceTable = ({data,deleteHandle}) => {
             dataIndex: 'image',
             id: 'image',
             render: (image) => {
+
                 return (
                     <Image
                         width={50}
 
-                        src={image}
+                        src={image?.image}
                     />
                 )
             },
@@ -63,14 +62,7 @@ const ServiceTable = ({data,deleteHandle}) => {
                         icon={<EditOutlined />}>
                         Edit
                     </Button>
-                    <Popconfirm
-                        title={'Are you sure to delete this task?'}
-                        description={'Delete the task '}
-                        onConfirm={() => Delete(record.id)}>
-                        <Button type='danger' icon={<DeleteOutlined />}>
-                            Delete
-                        </Button>
-                    </Popconfirm>
+
                 </Space>
             ),
         },
@@ -87,9 +79,9 @@ const ServiceTable = ({data,deleteHandle}) => {
     );
 };
 
-ServiceTable.propTypes={
+AboutTable.propTypes={
     data:PropTypes.array,
     deleteHandle:PropTypes.func
 }
 
-export default ServiceTable;
+export default AboutTable;

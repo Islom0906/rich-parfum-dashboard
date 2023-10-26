@@ -19,18 +19,12 @@ const Index = () => {
     const {data, isLoading: getProductLoading, refetch} = useQuery('product-get', () =>
             apiService.getData('/products/product/'), {
             // enabled:false,
-            onError: (error) => {
-                const err=[]
 
-                for (const property in error?.response?.data?.errors){
-                    err.push(error?.response?.data?.errors[property])
-
-                }
-
-
-                message.error(err[0][0]);
-                // Handle the error
-            },
+        onError: (error) => {
+            for (let obj in error.response.data) {
+                message.error(`${obj}: ${error.response.data[obj][0]}`)
+            }
+        }
         }
     );
 

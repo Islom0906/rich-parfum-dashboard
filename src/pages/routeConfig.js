@@ -1,4 +1,10 @@
 import {FaMapMarkerAlt} from "react-icons/fa";
+import {HiOutlineInbox} from "react-icons/hi";
+import {BsFillImageFill} from "react-icons/bs";
+import {FiInfo} from "react-icons/fi";
+import {VscFeedback} from "react-icons/vsc";
+import {IoShareSocialSharp} from "react-icons/io5";
+import {TiContacts} from "react-icons/ti";
 
 
 const routesConfig = [
@@ -17,66 +23,10 @@ const routesConfig = [
       //   path: '/dashboard',
       // },
       {
-        id: 'map',
-        title: 'map',
-        messageId: 'sidebar.sample.map',
-        type: 'item',
-        icon: <FaMapMarkerAlt />,
-        path: '/map',
-      },
-      {
-        id: 'service',
-        title: 'service',
-        messageId: 'sidebar.sample.service',
-        type: 'item',
-        icon: <FaMapMarkerAlt />,
-        path: '/service',
-      },
-      {
-        id: 'social',
-        title: 'social',
-        messageId: 'sidebar.sample.social',
-        type: 'item',
-        icon: <FaMapMarkerAlt />,
-        path: '/social',
-      },
-      {
-        id: 'partner',
-        title: 'partner',
-        messageId: 'sidebar.sample.partner',
-        type: 'item',
-        icon: <FaMapMarkerAlt />,
-        path: '/partner',
-      },
-      {
-        id: 'bannerFirst',
-        title: 'bannerFirst',
-        messageId: 'sidebar.sample.bannerFirst',
-        type: 'item',
-        icon: <FaMapMarkerAlt />,
-        path: '/banner-first',
-      },
-      {
-        id: 'contact',
-        title: 'contact',
-        messageId: 'sidebar.sample.contact',
-        type: 'item',
-        icon: <FaMapMarkerAlt />,
-        path: '/contact',
-      },
-      {
-        id: 'bannerSecond',
-        title: 'bannerSecond',
-        messageId: 'sidebar.sample.bannerSecond',
-        type: 'item',
-        icon: <FaMapMarkerAlt />,
-        path: '/banner-second',
-      },
-      {
         id: 'product',
         title: 'product',
         messageId: 'sidebar.product',
-        icon: <FaMapMarkerAlt />,
+        icon: <HiOutlineInbox />,
         type: 'collapse',
         children:[
           {
@@ -104,7 +54,63 @@ const routesConfig = [
             path: '/smell',
           },
         ]
-      }
+      },
+      {
+        id: 'bannerFirst',
+        title: 'bannerFirst',
+        messageId: 'sidebar.sample.bannerFirst',
+        type: 'item',
+        icon: <BsFillImageFill />,
+        path: '/banner-first',
+      },
+      {
+        id: 'bannerSecond',
+        title: 'bannerSecond',
+        messageId: 'sidebar.sample.bannerSecond',
+        type: 'item',
+        icon: <BsFillImageFill />,
+        path: '/banner-second',
+      },
+      {
+        id: 'map',
+        title: 'map',
+        messageId: 'sidebar.sample.map',
+        type: 'item',
+        icon: <FaMapMarkerAlt />,
+        path: '/map',
+      },
+      {
+        id: 'about',
+        title: 'about',
+        messageId: 'sidebar.sample.about',
+        type: 'item',
+        icon: <FiInfo />,
+        path: '/about',
+      },
+      {
+        id: 'partner',
+        title: 'partner',
+        messageId: 'sidebar.sample.userComment',
+        type: 'item',
+        icon: <VscFeedback />,
+        path: '/partner',
+      },
+      {
+        id: 'social',
+        title: 'social',
+        messageId: 'sidebar.sample.social',
+        type: 'item',
+        icon: <IoShareSocialSharp />,
+        path: '/social',
+      },
+      {
+        id: 'contact',
+        title: 'contact',
+        messageId: 'sidebar.sample.contact',
+        type: 'item',
+        icon: <TiContacts />,
+        path: '/contact',
+      },
     ],
   },
 ];

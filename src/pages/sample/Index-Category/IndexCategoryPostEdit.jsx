@@ -201,7 +201,7 @@ const IndexCategoryPostEdit = () => {
                         </Col>
                         <Col span={12}>
                             <Form.Item
-                                label="Дата"
+                                label="Дата (Не обязательно)"
                                 name="date"
                             >
                                 <Input/>

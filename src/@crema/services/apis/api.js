@@ -32,7 +32,6 @@ const apiService = {
     },
 
     async deleteImages(url, ids) {
-        console.log('delete image',ids)
         await axios.delete(url, {data:ids});
     },
 };

@@ -1,26 +1,20 @@
-import React, {useEffect, useState} from 'react';
-import ServiceTable from './ServiceTable';
+import React, { useState} from 'react';
+import AboutTable from './AboutTable';
 import {Button, Col, Input, message, Row, Space, Spin} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
 import {useNavigate} from 'react-router-dom';
 import apiService from '../../../@crema/services/apis/api';
-import {useMutation, useQuery} from 'react-query';
+import { useQuery} from 'react-query';
 import {EDIT_DATA} from '../../../shared/constants/ActionTypes';
 import {useDispatch} from 'react-redux';
 
 const Index = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const {
-    mutate,
-    isSuccess,
-    isLoading: deleteCategoryLoading,
-  } = useMutation(({url, id}) => apiService.deleteData(url, id));
+
   const {
     data,
-    isLoading: getCategoryLoading,
-    refetch,
-  } = useQuery('service-get', () => apiService.getData('/about/about-service'), {
+    isLoading: getCategoryLoading} = useQuery('about-get', () => apiService.getData('/about/about'), {
     // enabled:false,
     onError: (error) => {
 
@@ -30,19 +24,12 @@ const Index = () => {
   });
   const [search, setSearch] = useState([]);
   const [isSearch, setIsSearch] = useState(false);
-  const deleteHandle = (url, id) => {
-    mutate({url, id});
-  };
 
-  useEffect(() => {
-    if (isSuccess) {
-      refetch();
-    }
-  }, [isSuccess]);
+
 
   const addArticle = () => {
     dispatch({type: EDIT_DATA, payload: ''});
-    navigate('service/add');
+    navigate('/about/add');
   };
   const serachProduct = (value) => {
     if (value === '') {
@@ -68,6 +55,7 @@ const Index = () => {
           </Col>
           <Col span={8}>
             <Button
+                disabled={data?.length>0}
               type='primary'
               icon={<PlusOutlined />}
               style={{width: '100%'}}
@@ -78,10 +66,9 @@ const Index = () => {
         </Row>
         <Spin
           size='medium'
-          spinning={getCategoryLoading || deleteCategoryLoading}>
-          <ServiceTable
+          spinning={getCategoryLoading}>
+          <AboutTable
             data={isSearch ? search : data}
-            deleteHandle={deleteHandle}
           />
         </Spin>
       </Space>

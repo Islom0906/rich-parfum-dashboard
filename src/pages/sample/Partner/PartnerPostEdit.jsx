@@ -37,7 +37,7 @@ const PartnerPostEdit = () => {
 
     const [fileListProps, setFileListProps] = useState([]);
 
-    console.log(fileListProps)
+
     // query-partner
     const {
         mutate: postPartnerMutate,

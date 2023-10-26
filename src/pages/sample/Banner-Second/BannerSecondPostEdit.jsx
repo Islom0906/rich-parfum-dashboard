@@ -146,7 +146,6 @@ const BannerSecondPostEdit = () => {
                 image_uz: editBannerSecondData.image_uz,
                 image_ru: editBannerSecondData.image_ru,
             }
-            console.log(edit)
 
             setFileListPropsUz(imageInitialUz)
             setFileListPropsRu(imageInitialRu)

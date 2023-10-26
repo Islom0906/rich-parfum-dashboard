@@ -64,7 +64,6 @@ const JWTAuthAuthProvider = ({children}) => {
   }, []);
 
   const signInUser = async ({phone, password}) => {
-    console.log(phone,password)
     dispatch({type: FETCH_START});
     try {
       const {data} = await jwtAxios.post(`/user/admin-token`,{phone, password});

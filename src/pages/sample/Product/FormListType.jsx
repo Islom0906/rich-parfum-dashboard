@@ -1,12 +1,25 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Form,  InputNumber, Space,Typography} from "antd";
 import {MinusCircleOutlined} from "@ant-design/icons";
 import PropTypes from "prop-types";
 const { Title } = Typography;
 
 import './product.css'
+import {useQuery} from "react-query";
+import apiService from "../../../@crema/services/apis/api";
 
 const FormListType = ({name,title,value}) => {
+    const [logo, setLogo] = useState('')
+    const {data} = useQuery(
+        'get-logo',
+        () => apiService.getData('/products/site-logo/'),
+
+    );
+    useEffect(() => {
+        if (data){
+            setLogo(logo)
+        }
+    }, [data]);
     return (
 
         <div className={`${value!==title ? 'hidden' :''}`}>

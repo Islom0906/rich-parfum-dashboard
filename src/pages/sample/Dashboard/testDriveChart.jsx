@@ -13,7 +13,7 @@ const OrderChart = () => {
         () => apiService.getData('/testDrive'),
         {
             onError: (error) => {
-                console.log(error)
+
                 message.error(error);
             },
         },

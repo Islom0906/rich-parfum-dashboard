@@ -57,6 +57,7 @@ const Index = () => {
           </Col>
           <Col span={8}>
             <Button
+                disabled={data?.length>3}
               type='primary'
               icon={<PlusOutlined />}
               style={{width: '100%'}}

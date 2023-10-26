@@ -4,8 +4,8 @@ import {RoutePermittedRole} from '../../shared/constants/AppEnums';
 const Dashboard = React.lazy(() => import('./Dashboard'));
 const Map = React.lazy(() => import('./Map'));
 const MapPostEdit = React.lazy(() => import('./Map/MapPostEdit'));
-const Service = React.lazy(() => import('./About-service'));
-const ServicePostEdit = React.lazy(() => import('./About-service/ServicePostEdit'));
+const About = React.lazy(() => import('./About'));
+const AboutPostEdit = React.lazy(() => import('./About/AboutPostEdit'));
 const Social = React.lazy(() => import('./Social-media'));
 const SocialPostEdit = React.lazy(() => import('./Social-media/SocialPostEdit'));
 const Partner = React.lazy(() => import('./Partner'));
@@ -43,13 +43,13 @@ export const samplePagesConfigs = [
   },
   {
     permittedRole: RoutePermittedRole.user,
-    path: '/service',
-    element: <Service/>,
+    path: '/about',
+    element: <About/>,
   },
   {
     permittedRole: RoutePermittedRole.user,
-    path: '/map/add',
-    element: <ServicePostEdit/>,
+    path: '/about/add',
+    element: <AboutPostEdit/>,
   },
   {
     permittedRole: RoutePermittedRole.user,

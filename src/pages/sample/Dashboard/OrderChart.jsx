@@ -13,7 +13,7 @@ const DealersChart = () => {
       () => apiService.getData('/order'),
       {
         onError: (error) => {
-          console.log(error)
+
           message.error(error);
         },
       },

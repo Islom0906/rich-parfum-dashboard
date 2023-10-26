@@ -131,19 +131,20 @@ const SocialPostEdit = () => {
     const onFinish = (values) => {
 
 
-        console.log(values)
-        const formData = new FormData();
 
-        formData.append('facebook', `https://${values.facebook}`);
-        formData.append('telegram', `https://${values.telegram}`);
-        formData.append('instagram', `https://${values.instagram}`);
-        formData.append('youtube', `https://${values.youtube}`);
+        const data={
+            facebook:`https://${values.facebook}`,
+            telegram:`https://${values.telegram}`,
+            instagram:`https://${values.instagram}`,
+            youtube:`https://${values.youtube}`,
+        }
+
 
 
         if (editSocialData){
-            putSocial({url: '/about/social-media',data:formData,id:editId})
+            putSocial({url: '/about/social-media',data,id:editId})
         }else{
-            postSocialMutate({url: "/about/social-media/", data:formData});
+            postSocialMutate({url: "/about/social-media/", data});
         }
 
 

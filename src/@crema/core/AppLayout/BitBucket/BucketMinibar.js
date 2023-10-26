@@ -10,6 +10,7 @@ import clsx from 'clsx';
 import {useThemeContext} from '../../../utility/AppContextProvider/ThemeContextProvider';
 
 const BucketMinibar = () => {
+
   const {sidebarColorSet} = useSidebarContext();
   const {themeMode} = useThemeContext();
   return (

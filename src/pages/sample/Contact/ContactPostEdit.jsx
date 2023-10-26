@@ -143,7 +143,6 @@ const ContactPostEdit = () => {
 
     const onFinish = (values) => {
 
-        console.log(values)
 
 
         if (editContactData){
@@ -277,14 +276,7 @@ const ContactPostEdit = () => {
                                                 >
                                                     <Input/>
                                                 </Form.Item>
-                                                <Form.Item
-                                                    label={` ${index + 1}`}
-                                                    name={[field.name, "text"]}
 
-                                                    style={{width: "100%"}}
-                                                >
-                                                    <Input/>
-                                                </Form.Item>
                                             </Space>
 
 
