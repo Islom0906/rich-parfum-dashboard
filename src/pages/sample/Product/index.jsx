@@ -57,7 +57,7 @@ const Index = () => {
         }
 
 
-        const filterData=data?.results?.filter(data=>data.name_uz.toLowerCase().includes(value.toLowerCase()) || data.name_ru.toLowerCase().includes(value.toLowerCase()))
+        const filterData=data?.filter(data=>data.name_uz.toLowerCase().includes(value.toLowerCase()) || data.name_ru.toLowerCase().includes(value.toLowerCase()))
         setSearch(filterData)
     }
 

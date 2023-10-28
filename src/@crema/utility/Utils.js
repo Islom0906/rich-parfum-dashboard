@@ -113,7 +113,7 @@ export const getUserFromAuth0 = (user) => {
     return {
       id: 1,
       uid: user.sub,
-      displayName: user.name,
+      displayName: user.first_name,
       email: user.email,
       photoURL: user.picture,
       role: authRole.user,
@@ -152,7 +152,7 @@ export const getUserFromJwtAuth = (user) => {
     return {
       id: 1,
       uid: user._id,
-      displayName: user.name,
+      displayName: user.first_name,
       email: user.email,
       photoURL: user.avatar,
       role: authRole.user,

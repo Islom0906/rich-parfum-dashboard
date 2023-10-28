@@ -40,12 +40,6 @@ const BannerFirstTable = ({data,deleteHandle}) => {
             },
         },
         {
-            title: 'Время года',
-            dataIndex: 'season',
-            id: 'season',
-            render: (text) => <p>{text}</p>,
-        },
-        {
             title: 'Brand',
             dataIndex: 'brand',
             id: 'brand',

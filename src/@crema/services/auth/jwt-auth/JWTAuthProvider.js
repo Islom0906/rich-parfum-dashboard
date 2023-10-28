@@ -43,7 +43,7 @@ const JWTAuthAuthProvider = ({children}) => {
       }
       setAuthToken(token);
       jwtAxios
-        .get('/user/admin-me')
+        .get('/user/me')
         .then(({data}) =>
           setJWTAuthData({
             user: data,
@@ -66,7 +66,7 @@ const JWTAuthAuthProvider = ({children}) => {
   const signInUser = async ({phone, password}) => {
     dispatch({type: FETCH_START});
     try {
-      const {data} = await jwtAxios.post(`/user/admin-token`,{phone, password});
+      const {data} = await jwtAxios.post(`/user/token`,{phone, password});
       localStorage.setItem('richtoken', data.access);
       // setAuthToken(data);
       // const res = await jwtAxios.get('/auth');

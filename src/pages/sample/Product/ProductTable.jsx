@@ -17,6 +17,8 @@ const ProductTable = ({data,deleteHandle}) => {
 
     const [reverseData,setReverseData]=useState([])
 
+
+
     const Edit = (id) => {
         localStorage.setItem('editDataId',id)
         dispatch({type:EDIT_DATA,payload:id})
@@ -25,7 +27,7 @@ const ProductTable = ({data,deleteHandle}) => {
 
 
     useEffect(()=>{
-        const reverse=data?.results?.reverse()
+        const reverse=data?.reverse()
         setReverseData(reverse)
     },[data])
 

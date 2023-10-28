@@ -241,19 +241,19 @@ const BannerFirstPostEdit = () => {
     const optionsOccasion = useMemo(() => {
         return [
             {
-                value: 'Весна',
+                value: 'spring',
                 label: 'Весна',
             },
             {
-                value: 'Лето',
+                value: 'summer',
                 label: 'Лето',
             },
             {
-                value: 'Мужской',
-                label: 'Мужской',
+                value: 'autumn',
+                label: 'Осень',
             },
             {
-                value: 'Зима',
+                value: 'winter',
                 label: 'Зима',
             }
         ]

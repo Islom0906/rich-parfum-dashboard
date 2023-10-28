@@ -1,5 +1,5 @@
 import {useEffect, useMemo, useState} from 'react';
-import {Button, Col, Form, Input, message, Row, Select, Radio, Upload,Typography} from 'antd';
+import {Button, Col, Form, Input, message, Row, Select, Radio, Upload, Typography} from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import ImgCrop from 'antd-img-crop';
 import {useMutation, useQuery} from 'react-query';
@@ -9,7 +9,8 @@ import {useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {EDIT_DATA} from '../../../shared/constants/ActionTypes';
 import FormListType from "./FormListType";
-const {Title}=Typography
+
+const {Title} = Typography
 const initialValueForm = {
     name_uz: "",
     name_ru: "",
@@ -27,15 +28,9 @@ const initialValueForm = {
     image: [
         null
     ],
-    copy:[
-
-    ],
-    luxCopy:[
-
-    ],
-    original:[
-
-    ]
+    copy: [],
+    luxCopy: [],
+    original: []
 
 };
 
@@ -59,21 +54,18 @@ const PostEditProduct = () => {
     const {data: categoryData} = useQuery(
         'get-categories',
         () => apiService.getData('/products/index-category/'),
-
     );
 
     // query-brand
     const {data: brandData} = useQuery(
         'get-brand',
         () => apiService.getData('/products/brand/'),
-
     );
 
     // query-smell
     const {data: smellData} = useQuery(
         'get-smell',
         () => apiService.getData('/products/smell/'),
-
     );
 
 
@@ -140,7 +132,7 @@ const PostEditProduct = () => {
     });
     // delete-image-query
     const {mutate: imagesDeleteMutate} = useMutation(({url, id}) =>
-        apiService.deleteData(url, id),
+        apiService.deleteImages(url, id),
     );
 
     //                                           ===UseEffect===
@@ -157,8 +149,11 @@ const PostEditProduct = () => {
             }
 
         })
-        if (editProductSuccess&&delImage.length>0) {
-            imagesDeleteMutate({url: '/products/product-image/', id:delImage[0]});
+        if (editProductSuccess && delImage.length > 0) {
+            const ids={
+                image_ids:delImage
+            }
+            imagesDeleteMutate({url: '/products/product-image/', id:ids});
         }
         if (postProductSuccess || putProductSuccess) {
             navigate('/product');
@@ -187,9 +182,9 @@ const PostEditProduct = () => {
 
     //edit product
     useEffect(() => {
-        let copy=[]
-        let luxCopy=[]
-        let original=[]
+        let copy = []
+        let luxCopy = []
+        let original = []
 
         const imagesInitial = [];
         for (let i = 0; i < editProductData?.product_images?.length; i++) {
@@ -203,33 +198,33 @@ const PostEditProduct = () => {
             imagesInitial.push(editDefaultImages);
         }
 
-        editProductData?.product_type.map(type=>{
-            if (type.name_uz==='Copy'){
-                type?.product_size?.map(size=>{
-                    const data={
-                        litr:size.litr,
-                        price:size.price,
-                        discount:size.discount
+        editProductData?.product_type.map(type => {
+            if (type.name_uz === 'Copy') {
+                type?.product_size?.map(size => {
+                    const data = {
+                        litr: size.litr,
+                        price: size.price,
+                        discount: size.discount
                     }
                     copy.push(data)
                 })
             }
-            if (type.name_uz==='Lux Copy'){
-                type?.product_size?.map(size=>{
-                    const data={
-                        litr:size.litr,
-                        price:size.price,
-                        discount:size.discount
+            if (type.name_uz === 'Lux Copy') {
+                type?.product_size?.map(size => {
+                    const data = {
+                        litr: size.litr,
+                        price: size.price,
+                        discount: size.discount
                     }
                     luxCopy.push(data)
                 })
             }
-            if (type.name_uz==='Original'){
-                type?.product_size?.map(size=>{
-                    const data={
-                        litr:size.litr,
-                        price:size.price,
-                        discount:size.discount
+            if (type.name_uz === 'Original') {
+                type?.product_size?.map(size => {
+                    const data = {
+                        litr: size.litr,
+                        price: size.price,
+                        discount: size.discount
                     }
                     original.push(data)
                 })
@@ -249,7 +244,7 @@ const PostEditProduct = () => {
                 scents_ru: editProductData.scents_ru,
                 gender: editProductData.gender,
                 occasion: editProductData.occasion,
-                category: editProductData.category,
+                category: editProductData.category===null ? "" :editProductData.category,
                 brand: editProductData.brand_id,
                 smell: editProductData.smell,
                 image: imagesInitial,
@@ -265,7 +260,6 @@ const PostEditProduct = () => {
     // post product
     useEffect(() => {
         let imageData = []
-
 
 
         let patchImagesAndInitialImages = [];
@@ -335,8 +329,6 @@ const PostEditProduct = () => {
         }
 
 
-
-
         const data = {
             name_uz: valuesForm.name_uz,
             name_ru: valuesForm.name_ru,
@@ -348,7 +340,7 @@ const PostEditProduct = () => {
             scents_ru: valuesForm.scents_ru,
             gender: valuesForm.gender,
             occasion: valuesForm.occasion,
-            category: valuesForm.category,
+            category: valuesForm.category===""? null:valuesForm.category,
             brand: valuesForm.brand,
             smell: valuesForm.smell,
             image: imageData,
@@ -465,7 +457,7 @@ const PostEditProduct = () => {
         });
 
         const defaultData = {
-            value: null,
+            value: "",
             label: `Без категории`,
         };
         data?.push(defaultData)
@@ -500,7 +492,7 @@ const PostEditProduct = () => {
 
     const handleRemoveImage = (file) => {
         if (editProductSuccess) {
-            setDeleteImage(file);
+            setDeleteImage(prop=>[...prop,file]);
 
         }
     };
@@ -797,8 +789,8 @@ const PostEditProduct = () => {
                     </Form.Item>
 
                     <FormListType name={'copy'} title={'Copy'} value={productType}/>
-                   <FormListType name={'luxCopy'} title={'Lux Copy'} value={productType}/>
-                   <FormListType name={'original'} title={'Original'} value={productType}/>
+                    <FormListType name={'luxCopy'} title={'Lux Copy'} value={productType}/>
+                    <FormListType name={'original'} title={'Original'} value={productType}/>
 
 
                     <Button type='primary' htmlType='submit' style={{width: '100%'}}>
