@@ -24,6 +24,10 @@ const BannerSecond = React.lazy(() => import('./Banner-Second'));
 const BannerSecondPostEdit = React.lazy(() => import('./Banner-Second/BannerSecondPostEdit'));
 const Contact = React.lazy(() => import('./Contact'));
 const ContactPostEdit = React.lazy(() => import('./Contact/ContactPostEdit'));
+const Logo = React.lazy(() => import('./Logo'));
+const LogoPostEdit = React.lazy(() => import('./Logo/LogoPostEdit'));
+const Special = React.lazy(() => import('./Special'));
+const SpecialPostEdit = React.lazy(() => import('./Special/SpecialPostEdit'));
 
 export const samplePagesConfigs = [
   {
@@ -141,5 +145,24 @@ export const samplePagesConfigs = [
     path: '/contact/add',
     element: <ContactPostEdit/>,
   },
-
+  {
+    permittedRole: RoutePermittedRole.user,
+    path: '/logo',
+    element: <Logo/>,
+  },
+  {
+    permittedRole: RoutePermittedRole.user,
+    path: '/logo/add',
+    element: <LogoPostEdit/>,
+  },
+  {
+    permittedRole: RoutePermittedRole.user,
+    path: '/special',
+    element: <Special/>,
+  },
+  {
+    special: RoutePermittedRole.user,
+    path: '/special/add',
+    element: <SpecialPostEdit/>,
+  },
 ];

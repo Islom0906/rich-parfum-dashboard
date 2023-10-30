@@ -4,7 +4,7 @@ import {BsFillImageFill} from "react-icons/bs";
 import {FiInfo} from "react-icons/fi";
 import {VscFeedback} from "react-icons/vsc";
 import {IoShareSocialSharp} from "react-icons/io5";
-import {TiContacts} from "react-icons/ti";
+import {TiContacts, TiImage} from "react-icons/ti";
 
 
 const routesConfig = [
@@ -52,6 +52,12 @@ const routesConfig = [
             title: 'smell',
             messageId: 'sidebar.sample.smell',
             path: '/smell',
+          },
+          {
+            id: 'special',
+            title: 'special',
+            messageId: 'sidebar.sample.special',
+            path: '/special',
           },
         ]
       },
@@ -110,6 +116,14 @@ const routesConfig = [
         type: 'item',
         icon: <TiContacts />,
         path: '/contact',
+      },
+      {
+        id: 'logo',
+        title: 'logo',
+        messageId: 'sidebar.sample.logo',
+        type: 'item',
+        icon: <TiImage />,
+        path: '/logo',
       },
     ],
   },

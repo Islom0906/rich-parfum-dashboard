@@ -23,6 +23,7 @@ const initialValueForm = {
     gender: "",
     occasion: "",
     category: null,
+    special: null,
     brand: null,
     smell: null,
     image: [
@@ -67,6 +68,13 @@ const PostEditProduct = () => {
         'get-smell',
         () => apiService.getData('/products/smell/'),
     );
+
+    // query-special
+    const {data: specialData} = useQuery(
+        'get-special',
+        () => apiService.getData('/products/special/'),
+    );
+
 
 
     // query-product
@@ -245,6 +253,7 @@ const PostEditProduct = () => {
                 gender: editProductData.gender,
                 occasion: editProductData.occasion,
                 category: editProductData.category===null ? "" :editProductData.category,
+                special: editProductData.special===null ? "" :editProductData.special,
                 brand: editProductData.brand_id,
                 smell: editProductData.smell,
                 image: imagesInitial,
@@ -341,6 +350,7 @@ const PostEditProduct = () => {
             gender: valuesForm.gender,
             occasion: valuesForm.occasion,
             category: valuesForm.category===""? null:valuesForm.category,
+            special: valuesForm.special===""? null:valuesForm.special,
             brand: valuesForm.brand,
             smell: valuesForm.smell,
             image: imageData,
@@ -483,6 +493,22 @@ const PostEditProduct = () => {
         });
     }, [smellData]);
 
+    const optionsSpecial = useMemo(() => {
+        const data= specialData?.map((option) => {
+            return {
+                value: option?.id,
+                label: option?.title_ru,
+            };
+        });
+
+        const defaultData = {
+            value: "",
+            label: `Удалить из специального`,
+        };
+        data?.push(defaultData)
+
+        return data
+    }, [specialData]);
 
     const onChange = ({fileList: newFileList}) => {
         setFileListProps(newFileList);
@@ -738,7 +764,7 @@ const PostEditProduct = () => {
                         </Col>
                     </Row>
                     <Row gutter={20}>
-                        <Col span={24}>
+                        <Col span={12}>
                             <Form.Item
                                 label={'Выберите запах'}
                                 name={'smell'}
@@ -756,6 +782,25 @@ const PostEditProduct = () => {
                                     placeholder='Выберите одну запах'
                                     optionLabelProp='label'
                                     options={optionsSmell}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                            <Form.Item
+                                label={'Добавить в специальный'}
+                                name={'special'}
+                                wrapperCol={{
+                                    span: 24,
+                                }}
+                                >
+
+                                <Select
+                                    style={{
+                                        width: '100%',
+                                    }}
+                                    placeholder='Добавить в специальный'
+                                    optionLabelProp='label'
+                                    options={optionsSpecial}
                                 />
                             </Form.Item>
                         </Col>
