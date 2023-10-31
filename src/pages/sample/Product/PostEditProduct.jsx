@@ -511,7 +511,7 @@ const PostEditProduct = () => {
 
     const onChange = ({fileList: newFileList}) => {
         setFileListProps(newFileList);
-        form.setFieldsValue({images: newFileList});
+        form.setFieldsValue({image: newFileList});
 
     };
 
