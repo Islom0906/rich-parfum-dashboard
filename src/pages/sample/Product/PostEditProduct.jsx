@@ -26,9 +26,7 @@ const initialValueForm = {
     special: null,
     brand: null,
     smell: null,
-    image: [
-        null
-    ],
+    image: [],
     copy: [],
     luxCopy: [],
     original: []
@@ -366,6 +364,7 @@ const PostEditProduct = () => {
 
 
     const onFinish = (values) => {
+        console.log(values)
         const formData = new FormData();
 
         let uploadNewImage = false;

@@ -57,6 +57,7 @@ const Index = () => {
           <Col span={8}>
             <Button
               type='primary'
+              disabled={data?.length>0}
               icon={<PlusOutlined />}
               style={{width: '100%'}}
               onClick={addArticle}>
