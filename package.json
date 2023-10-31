@@ -1,6 +1,6 @@
 {
   "name": "crema",
-  "homepage": "https://admin.tashkentmarket.ae",
+  "homepage": "/admin",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
