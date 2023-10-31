@@ -364,7 +364,6 @@ const PostEditProduct = () => {
 
 
     const onFinish = (values) => {
-        console.log(values)
         const formData = new FormData();
 
         let uploadNewImage = false;
