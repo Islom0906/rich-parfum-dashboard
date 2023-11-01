@@ -36,7 +36,6 @@ const AppLayout = () => {
   }, [layoutType]);
 
   useEffect(() => {
-    console.log(params.layout);
     if (params.layout) updateNavStyle(params.layout);
     if (params.menuStyle) updateMenuStyle(params.menuStyle);
     if (params.sidebarImage) setSidebarBgImage(true);

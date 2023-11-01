@@ -303,9 +303,9 @@ const OptionPostEdit = () => {
         if (fileListPropsMain.length !== 0 || newFileList.length === 0) {
             const id = [fileListPropsMain[0]?.uid];
             const ids = {
-                ids: id
+                image_ids: id
             }
-            imagesDeleteMutate({url: "/products/product-image", ids});
+            imagesDeleteMutate({url: "/delete-images", ids});
             setFileListPropsMain([])
         }
         const formData = new FormData();
@@ -324,9 +324,9 @@ const OptionPostEdit = () => {
         if (fileListPropsChild[index] || newFileList.length === 0) {
             const id = [fileListPropsChild[index][0].uid];
             const ids = {
-                ids: id
+                image_ids: id
             }
-            imagesDeleteMutate({url: "/products/product-image", ids});
+            imagesDeleteMutate({url: "/delete-images", ids});
             fileListPropsChild[index] = null;
             setFileListPropsChild(fileListPropsChild);
 
@@ -348,9 +348,9 @@ const OptionPostEdit = () => {
             const id = [fileListPropsChild[index][0]?.uid];
             fileListPropsChild.splice(index, 1);
             const ids = {
-                ids: id
+                image_ids: id
             }
-            imagesDeleteMutate({url: "/medias", ids});
+            imagesDeleteMutate({url: "/delete-images", ids});
         }
         remove(name);
     };

@@ -159,7 +159,7 @@ const PostEditProduct = () => {
             const ids={
                 image_ids:delImage
             }
-            imagesDeleteMutate({url: '/products/product-image/', id:ids});
+            imagesDeleteMutate({url: '/delete-images', id:ids});
         }
         if (postProductSuccess || putProductSuccess) {
             navigate('/product');
