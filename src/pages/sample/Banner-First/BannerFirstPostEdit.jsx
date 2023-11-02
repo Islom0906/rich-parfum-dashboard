@@ -350,9 +350,9 @@ const BannerFirstPostEdit = () => {
                         </Col>
                         <Col span={12}>
                             <Form.Item
-                                label='Изображение Uz'
+                                label='Banner rasm  Uz'
                                 name={'image_uz'}
-                                rules={[{required: true, message: 'Требуется загрузка изображения Uz'}]}>
+                                rules={[{required: true, message: 'Banner Rasm talab qilinadi'}]}>
                                 <ImgCrop rotationSlider>
                                     <Upload
                                         maxCount={1}
