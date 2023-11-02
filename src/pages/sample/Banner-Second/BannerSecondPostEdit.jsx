@@ -320,7 +320,7 @@ const BannerSecondPostEdit = () => {
                         <Col span={12}>
                             <Form.Item
                                 label='Изображение Ru'
-                                name={'image_uz'}
+                                name={'image_ru'}
                                 rules={[{required: true, message: 'Требуется загрузка изображения Ru'}]}>
                                 <ImgCrop rotationSlider>
                                     <Upload
@@ -339,7 +339,7 @@ const BannerSecondPostEdit = () => {
                         <Col span={12}>
                             <Form.Item
                                 label='Изображение Uz'
-                                name={'image_ru'}
+                                name={'image_uz'}
                                 rules={[{required: true, message: 'Требуется загрузка изображения Uz'}]}>
                                 <ImgCrop rotationSlider>
                                     <Upload
