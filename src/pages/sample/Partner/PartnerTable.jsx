@@ -32,18 +32,18 @@ const PartnerTable = ({data,deleteHandle}) => {
             id: 'full_name_uz',
             render: (text) => <p>{text}</p>,
         },
-        {
-            title: 'Job Uz',
-            dataIndex: 'job_uz',
-            id: 'job_uz',
-            render: (text) => <p>{text}</p>,
-        },
-        {
-            title: 'Job Ru',
-            dataIndex: 'job_ru',
-            id: 'job_ru',
-                render: (text) => <p>{text}</p>,
-        },
+        // {
+        //     title: 'Job Uz',
+        //     dataIndex: 'job_uz',
+        //     id: 'job_uz',
+        //     render: (text) => <p>{text}</p>,
+        // },
+        // {
+        //     title: 'Job Ru',
+        //     dataIndex: 'job_ru',
+        //     id: 'job_ru',
+        //         render: (text) => <p>{text}</p>,
+        // },
         {
             title: 'Image',
             dataIndex: 'image',

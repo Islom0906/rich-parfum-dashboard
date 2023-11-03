@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Col, Form, Input, message, Row, Upload, Typography} from "antd";
+import {Button, Col, Form, Input, message, Row, Upload} from "antd";
 import {useMutation, useQuery} from "react-query";
 import apiService from "../../../@crema/services/apis/api";
 import {AppLoader} from "../../../@crema";
@@ -9,7 +9,6 @@ import {EDIT_DATA} from "../../../shared/constants/ActionTypes";
 import TextArea from "antd/es/input/TextArea";
 import ImgCrop from "antd-img-crop";
 
-const {Title} = Typography
 
 const initialValueForm = {
     full_name_uz: "",
@@ -138,10 +137,10 @@ const PartnerPostEdit = () => {
                 text_uz: editPartnerData.text_uz,
                 text_ru: editPartnerData.text_ru,
                 image: editPartnerData.image,
-                facebook: editPartnerData.facebook.split('//')[1],
-                instagram: editPartnerData.instagram.split('//')[1],
-                telegram: editPartnerData.telegram.split('//')[1],
-                youtube: editPartnerData.youtube.split('//')[1]
+                facebook: '',
+                instagram: '',
+                telegram: '',
+                youtube: ''
             }
 
             setFileListProps(imageInitial)
@@ -157,8 +156,8 @@ const PartnerPostEdit = () => {
 
         formData.append('full_name_uz', values.full_name_uz);
         formData.append('full_name_ru', values.full_name_ru);
-        formData.append('job_uz', values.job_uz);
-        formData.append('job_ru', values.job_ru);
+        formData.append('job_uz', '');
+        formData.append('job_ru', '');
         formData.append('text_uz', values.text_uz);
         formData.append('text_ru', values.text_ru);
 
@@ -166,10 +165,10 @@ const PartnerPostEdit = () => {
             formData.append('image', fileListProps[0]?.originFileObj);
         }
 
-        formData.append('facebook', `https://${values.facebook}`);
-        formData.append('telegram', `https://${values.telegram}`);
-        formData.append('instagram', `https://${values.instagram}`);
-        formData.append('youtube', `https://${values.youtube}`);
+        formData.append('facebook', '');
+        formData.append('telegram', '');
+        formData.append('instagram', '');
+        formData.append('youtube', '');
 
 
         if (editPartnerData) {
@@ -278,30 +277,30 @@ const PartnerPostEdit = () => {
                         </Col>
 
                     </Row>
-                    <Row gutter={20}>
-                        <Col span={12}>
-                            <Form.Item
-                                label="Kasb"
-                                name="job_uz"
-                                rules={[{required: true, message: 'Kasb talab qilinadi'}]}
+                    {/*<Row gutter={20}>*/}
+                    {/*    <Col span={12}>*/}
+                    {/*        <Form.Item*/}
+                    {/*            label="Kasb"*/}
+                    {/*            name="job_uz"*/}
+                    {/*            rules={[{required: true, message: 'Kasb talab qilinadi'}]}*/}
 
-                            >
-                                <Input/>
-                            </Form.Item>
+                    {/*        >*/}
+                    {/*            <Input/>*/}
+                    {/*        </Form.Item>*/}
 
-                        </Col>
-                        <Col span={12}>
-                            <Form.Item
-                                label="Работа"
-                                name="job_ru"
-                                rules={[{required: true, message: 'Требуется Работа'}]}
-                            >
-                                <Input/>
-                            </Form.Item>
+                    {/*    </Col>*/}
+                    {/*    <Col span={12}>*/}
+                    {/*        <Form.Item*/}
+                    {/*            label="Работа"*/}
+                    {/*            name="job_ru"*/}
+                    {/*            rules={[{required: true, message: 'Требуется Работа'}]}*/}
+                    {/*        >*/}
+                    {/*            <Input/>*/}
+                    {/*        </Form.Item>*/}
 
-                        </Col>
+                    {/*    </Col>*/}
 
-                    </Row>
+                    {/*</Row>*/}
                     <Row gutter={20}>
                         <Col span={12}>
                             <Form.Item
@@ -345,55 +344,55 @@ const PartnerPostEdit = () => {
                             </ImgCrop>
                         </Form.Item>
                     </Row>
-                    <Title level={4}>Социальные сети пользователя</Title>
-                    <Row gutter={20}>
-                        <Col span={12}>
-                            <Form.Item
-                                label="Facebook"
-                                name="facebook"
-                                rules={[{required: true, message: 'Требуется Facebook'}]}
+                    {/*<Title level={4}>Социальные сети пользователя</Title>*/}
+                    {/*<Row gutter={20}>*/}
+                    {/*    <Col span={12}>*/}
+                    {/*        <Form.Item*/}
+                    {/*            label="Facebook"*/}
+                    {/*            name="facebook"*/}
+                    {/*            rules={[{required: true, message: 'Требуется Facebook'}]}*/}
 
-                            >
-                                <Input addonBefore={'https://'}/>
-                            </Form.Item>
+                    {/*        >*/}
+                    {/*            <Input addonBefore={'https://'}/>*/}
+                    {/*        </Form.Item>*/}
 
-                        </Col>
-                        <Col span={12}>
-                            <Form.Item
-                                label="Instagram"
-                                name="instagram"
-                                rules={[{required: true, message: 'Требуется Instagram'}]}
-                            >
-                                <Input addonBefore={'https://'}/>
-                            </Form.Item>
+                    {/*    </Col>*/}
+                    {/*    <Col span={12}>*/}
+                    {/*        <Form.Item*/}
+                    {/*            label="Instagram"*/}
+                    {/*            name="instagram"*/}
+                    {/*            rules={[{required: true, message: 'Требуется Instagram'}]}*/}
+                    {/*        >*/}
+                    {/*            <Input addonBefore={'https://'}/>*/}
+                    {/*        </Form.Item>*/}
 
-                        </Col>
+                    {/*    </Col>*/}
 
-                    </Row>
-                    <Row gutter={20}>
-                        <Col span={12}>
-                            <Form.Item
-                                label="Telegram"
-                                name="telegram"
-                                rules={[{required: true, message: 'Требуется Telegram'}]}
-                            >
-                                <Input addonBefore={'https://'}/>
-                            </Form.Item>
+                    {/*</Row>*/}
+                    {/*<Row gutter={20}>*/}
+                    {/*    <Col span={12}>*/}
+                    {/*        <Form.Item*/}
+                    {/*            label="Telegram"*/}
+                    {/*            name="telegram"*/}
+                    {/*            rules={[{required: true, message: 'Требуется Telegram'}]}*/}
+                    {/*        >*/}
+                    {/*            <Input addonBefore={'https://'}/>*/}
+                    {/*        </Form.Item>*/}
 
-                        </Col>
-                        <Col span={12}>
-                            <Form.Item
-                                label="Youtube"
-                                name="youtube"
-                                rules={[{required: true, message: 'Требуется Youtube'}]}
+                    {/*    </Col>*/}
+                    {/*    <Col span={12}>*/}
+                    {/*        <Form.Item*/}
+                    {/*            label="Youtube"*/}
+                    {/*            name="youtube"*/}
+                    {/*            rules={[{required: true, message: 'Требуется Youtube'}]}*/}
 
-                            >
-                                <Input addonBefore={'https://'}/>
-                            </Form.Item>
+                    {/*        >*/}
+                    {/*            <Input addonBefore={'https://'}/>*/}
+                    {/*        </Form.Item>*/}
 
-                        </Col>
+                    {/*    </Col>*/}
 
-                    </Row>
+                    {/*</Row>*/}
                     <Button type="primary" htmlType="submit" style={{width: "100%", marginTop: "20px"}}>
                         {
                             editPartnerSuccess ? 'Edit' : 'Add'

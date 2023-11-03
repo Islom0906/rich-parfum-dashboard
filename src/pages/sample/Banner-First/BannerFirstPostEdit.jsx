@@ -339,7 +339,7 @@ const BannerFirstPostEdit = () => {
                                         maxCount={1}
                                         fileList={fileListPropsUz}
                                         listType='picture-card'
-                                        onChange={onChangeUz}
+                                        onChange={onChangeRu}
                                         onPreview={onPreview}
                                         beforeUpload={() => false}
                                     >
@@ -358,7 +358,7 @@ const BannerFirstPostEdit = () => {
                                         maxCount={1}
                                         fileList={fileListPropsRu}
                                         listType='picture-card'
-                                        onChange={onChangeRu}
+                                        onChange={onChangeUz}
                                         onPreview={onPreview}
                                         beforeUpload={() => false}
                                     >
