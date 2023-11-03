@@ -337,13 +337,13 @@ const BannerFirstPostEdit = () => {
                                 <ImgCrop rotationSlider>
                                     <Upload
                                         maxCount={1}
-                                        fileList={fileListPropsUz}
+                                        fileList={fileListPropsRu}
                                         listType='picture-card'
                                         onChange={onChangeRu}
                                         onPreview={onPreview}
                                         beforeUpload={() => false}
                                     >
-                                        {fileListPropsUz.length > 0 ? "" : "Upload"}
+                                        {fileListPropsRu.length > 0 ? "" : "Upload"}
                                     </Upload>
                                 </ImgCrop>
                             </Form.Item>
@@ -356,13 +356,13 @@ const BannerFirstPostEdit = () => {
                                 <ImgCrop rotationSlider>
                                     <Upload
                                         maxCount={1}
-                                        fileList={fileListPropsRu}
+                                        fileList={fileListPropsUz}
                                         listType='picture-card'
                                         onChange={onChangeUz}
                                         onPreview={onPreview}
                                         beforeUpload={() => false}
                                     >
-                                        {fileListPropsRu.length > 0 ? "" : "Upload"}
+                                        {fileListPropsUz.length > 0 ? "" : "Upload"}
                                     </Upload>
                                 </ImgCrop>
                             </Form.Item>

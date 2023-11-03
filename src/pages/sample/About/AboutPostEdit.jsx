@@ -212,7 +212,7 @@ const OptionPostEdit = () => {
 
         const data = {
             text_uz: values.text_uz,
-            text_ru: values.text_uz,
+            text_ru: values.text_ru,
             image: [fileListPropsMain[0]?.uid],
             about_children: children
         };
@@ -411,7 +411,7 @@ const OptionPostEdit = () => {
                     <Col span={12}>
                         <Form.Item
                             label="Выберите Вариант"
-                            name="text_uz"
+                            name="text_ru"
                             rules={[{
                                 required: true, message: "Пожалуйста, введите Вариант"
                             }]}
@@ -423,7 +423,7 @@ const OptionPostEdit = () => {
                     <Col span={12}>
                         <Form.Item
                             label="Kompaniya haqida matn"
-                            name="text_ru"
+                            name="text_uz"
                             rules={[{
                                 required: true, message: "Matn talab qilinadi"
                             }]}
