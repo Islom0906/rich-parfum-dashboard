@@ -51,7 +51,7 @@ const AppThemeSetting = () => {
         className={clsx('customize-drawer', {
           boxedDrawer: layoutType === LayoutType.BOXED,
         })}
-        visible={open}
+        open={open}
         onClose={() => setCustomizerStatus(false)}>
         <AppScrollbar>
           <div className='customize-header'>

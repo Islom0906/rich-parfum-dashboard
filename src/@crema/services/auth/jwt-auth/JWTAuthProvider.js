@@ -7,6 +7,8 @@ import {
   FETCH_SUCCESS,
 } from '../../../../shared/constants/ActionTypes';
 import jwtAxios,{setAuthToken} from './jwt-api';
+import apiService from "../../apis/api";
+import axios from "axios";
 
 const JWTAuthContext = createContext();
 const JWTAuthActionsContext = createContext();
@@ -23,6 +25,41 @@ const JWTAuthAuthProvider = ({children}) => {
   });
 
   const dispatch = useDispatch();
+
+  // jwtAxios response
+  jwtAxios.interceptors.response.use(
+      (res) => res,
+      async (err) => {
+        const getRefToken = localStorage.getItem('richRefToken')
+
+        if (err.response.status === 401 && err.response.config.method !== "get" && getRefToken) {
+          try {
+            const refreshTokenData = {
+              refresh: getRefToken
+            }
+            const newToken = await apiService.postData('/user/token/refresh/', refreshTokenData);
+            localStorage.setItem('richtoken', newToken.access)
+
+            // Retry the original request with the new token
+            const originalRequest = err.config;
+            originalRequest.headers.Authorization = `Bearer ${newToken.access}`
+            jwtAxios.defaults.headers.common['Authorization'] = `Bearer ${newToken.access}`;
+            return axios(originalRequest)
+          } catch (refreshError) {
+            return Promise.reject(refreshError);
+          }
+        }else if (err.response.status === 401){
+          setJWTAuthData({
+            user: undefined,
+            isLoading: false,
+            isAuthenticated: false,
+          });
+        }
+        return Promise.reject(err);
+      },
+  );
+
+
 
   useEffect(() => {
     const getAuthUser = () => {
@@ -68,6 +105,7 @@ const JWTAuthAuthProvider = ({children}) => {
     try {
       const {data} = await jwtAxios.post(`/user/token`,{phone, password});
       localStorage.setItem('richtoken', data.access);
+      localStorage.setItem('richRefToken', data.refresh);
       // setAuthToken(data);
       // const res = await jwtAxios.get('/auth');
       setJWTAuthData({user: undefined, isAuthenticated: true, isLoading: false});
@@ -104,6 +142,7 @@ const JWTAuthAuthProvider = ({children}) => {
 
   const logout = async () => {
     localStorage.removeItem('richtoken');
+    localStorage.removeItem('richRefToken');
     setAuthToken();
     setJWTAuthData({
       user: null,

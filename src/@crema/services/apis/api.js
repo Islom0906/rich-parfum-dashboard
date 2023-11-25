@@ -1,4 +1,4 @@
-import axios from './axios';
+import axios from '../auth/jwt-auth/jwt-api';
 
 const apiService = {
     // malutmotlarni get qilish uchun url beriladi

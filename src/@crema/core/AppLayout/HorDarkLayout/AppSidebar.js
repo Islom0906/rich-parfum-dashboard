@@ -27,7 +27,7 @@ const AppSidebar = ({visible, onClose}) => {
       placement={direction === ThemeDirection.LTR ? 'left' : 'right'}
       closable={false}
       onClose={onClose}
-      visible={visible}>
+      open={visible}>
       <MainSidebar
         className={clsx('app-main-hor-dark-sidebar', {
           'hor-dark-sidebar-img-background': isSidebarBgImage,

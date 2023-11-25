@@ -446,8 +446,8 @@ const PostEditProduct = () => {
                 label: 'Лето',
             },
             {
-                value: 'Осень',
-                label: 'Мужской',
+                value: 'autumn',
+                label: 'Осень',
             },
             {
                 value: 'winter',

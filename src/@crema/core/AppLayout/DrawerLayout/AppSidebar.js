@@ -27,7 +27,7 @@ const AppSidebar = ({visible, onClose}) => {
       placement={direction === ThemeDirection.LTR ? 'left' : 'right'}
       closable={false}
       onClose={onClose}
-      visible={visible}>
+      open={visible}>
       <MainSidebar
         className={clsx('app-DrawerLayout-sidebar', {
           'drawerLayout-sidebar-img-background': isSidebarBgImage,
