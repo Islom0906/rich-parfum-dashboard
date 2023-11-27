@@ -106,7 +106,7 @@ const JWTAuthAuthProvider = ({children}) => {
       const {data} = await jwtAxios.post(`/user/token`,{phone, password});
       localStorage.setItem('richtoken', data.access);
       localStorage.setItem('richRefToken', data.refresh);
-      // setAuthToken(data);
+      setAuthToken(data.access);
       // const res = await jwtAxios.get('/auth');
       setJWTAuthData({user: undefined, isAuthenticated: true, isLoading: false});
       dispatch({type: FETCH_SUCCESS});

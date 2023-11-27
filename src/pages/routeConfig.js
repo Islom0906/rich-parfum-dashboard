@@ -23,15 +23,15 @@ const routesConfig = [
       //   path: '/dashboard',
       // },
       {
-        id: 'product',
-        title: 'product',
+        id: 'product-page',
+        title: 'product-page',
         messageId: 'sidebar.product',
         icon: <HiOutlineInbox />,
         type: 'collapse',
         children:[
           {
             id: 'product',
-            title: 'product',
+            title: 'product-page',
             messageId: 'sidebar.sample.product',
             path: '/product',
           },
