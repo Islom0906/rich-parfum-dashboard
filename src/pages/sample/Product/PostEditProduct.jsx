@@ -432,6 +432,10 @@ const PostEditProduct = () => {
             {
                 value: 'female',
                 label: 'Женский',
+            },
+            {
+                value: 'unisex',
+                label: 'Унисекс',
             }
         ]
     }, []);
