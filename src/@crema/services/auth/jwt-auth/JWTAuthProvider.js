@@ -101,6 +101,9 @@ const JWTAuthAuthProvider = ({children}) => {
   }, []);
 
   const signInUser = async ({phone, password}) => {
+    if (localStorage.getItem('richRefToken')){
+      localStorage.removeItem('richRefToken')
+    }
     dispatch({type: FETCH_START});
     try {
       const {data} = await jwtAxios.post(`/user/token`,{phone, password});
