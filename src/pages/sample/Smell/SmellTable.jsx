@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import {useDispatch} from "react-redux";
 import {EDIT_DATA} from "../../../shared/constants/ActionTypes";
 import {useNavigate} from "react-router-dom";
-import { useEffect, useState } from "react";
 
 const SmellTable = ({data,deleteHandle}) => {
     const dispatch=useDispatch()
@@ -13,7 +12,7 @@ const SmellTable = ({data,deleteHandle}) => {
     const Delete = async (id) => {
         deleteHandle('/products/smell',id)
     };
-    const [reverseData,setReverseData]=useState([])
+    // const [reverseData,setReverseData]=useState([])
 
     const Edit = (id) => {
         localStorage.setItem('editDataId',id)
@@ -21,10 +20,10 @@ const SmellTable = ({data,deleteHandle}) => {
         navigate('/smell/add')
     };
 
-    useEffect(()=>{
-        const reverse=data?.reverse()
-        setReverseData(reverse)
-    },[data])
+    // useEffect(()=>{
+    //     const reverse=data?.reverse()
+    //     setReverseData(reverse)
+    // },[data])
     const columns = [
         {
             title: 'Name Uz',
@@ -67,7 +66,7 @@ const SmellTable = ({data,deleteHandle}) => {
         <div>
             <Table
                 columns={columns}
-                dataSource={reverseData}
+                dataSource={data}
 
                 rowKey={(record) => record.id}
             />
